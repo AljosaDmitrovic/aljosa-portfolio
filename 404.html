@@ -8,7 +8,7 @@
   <script>
     (function () {
       var seg = location.pathname.split("/")[1];
-      var base = location.hostname.slice(-10) === "github.io" && seg ? "/" + seg + "/" : "/";
+      var base = /\.github\.io$/.test(location.hostname) && seg ? "/" + seg + "/" : "/";
       document.write('<base href="' + base + '">');
     })();
   </script>
