@@ -114,8 +114,6 @@
     return parts.join(" ");
   };
 
-  const chevron = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
-
   function groupExperience(list) {
     const groups = [];
     list.forEach((role) => {
@@ -131,10 +129,7 @@
     return groups;
   }
 
-  function renderRole(role, isGroup, uid) {
-    const visible = role.bullets.slice(0, 2);
-    const hidden = role.bullets.slice(2);
-    const moreId = `xp-more-${uid}`;
+  function renderRole(role, isGroup) {
     const title = isGroup
       ? `${escapeHtml(role.role)} <span class="at">· ${escapeHtml(role.product)}</span>`
       : escapeHtml(role.role);
@@ -147,12 +142,11 @@
         </div>
         <span class="xp-domain">${escapeHtml(role.domain)}</span>
         ${role.context ? `<p class="xp-context">${escapeHtml(role.context)}</p>` : ""}
-        <ul class="xp-bullets">${visible.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
         ${
-          hidden.length
-            ? `<div class="xp-more" id="${moreId}"><ul class="xp-bullets">${hidden.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul></div>
-               <button class="xp-toggle" type="button" aria-expanded="false" aria-controls="${moreId}">
-                 <span>Show ${hidden.length} more</span>${chevron}
+          role.bullets.length
+            ? `<div class="xp-more"><ul class="xp-bullets">${role.bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul></div>
+               <button class="xp-toggle" type="button" aria-expanded="false">
+                 <span>Show all</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                </button>`
             : ""
         }
@@ -166,7 +160,6 @@
       .join("");
 
     const groups = groupExperience(cv.experience);
-    let uid = 0;
 
     document.getElementById("timeline").innerHTML = groups
       .map((g) => {
@@ -184,11 +177,11 @@
             <header class="xp-company">
               <span class="xp-logo" aria-hidden="true">${escapeHtml(g.initials)}</span>
               <div>
-                <h3 class="xp-company-name">${escapeHtml(g.company)}${g.current ? '<span class="present-pill">Present</span>' : ""}</h3>
+                <h3 class="xp-company-name">${escapeHtml(g.company)}</h3>
                 <p class="xp-company-sub">${sub}</p>
               </div>
             </header>
-            ${g.roles.map((r) => renderRole(r, isGroup, uid++)).join("")}
+            ${g.roles.map((r) => renderRole(r, isGroup)).join("")}
           </article>
         </li>`;
       })
@@ -206,12 +199,10 @@
     timeline.addEventListener("click", (e) => {
       const btn = e.target.closest(".xp-toggle");
       if (!btn) return;
-      const panel = document.getElementById(btn.getAttribute("aria-controls"));
       const open = btn.getAttribute("aria-expanded") !== "true";
       btn.setAttribute("aria-expanded", String(open));
-      panel.classList.toggle("is-open", open);
-      const n = panel.querySelectorAll("li").length;
-      btn.querySelector("span").textContent = open ? "Show less" : `Show ${n} more`;
+      btn.querySelector("span").textContent = open ? "Hide all" : "Show all";
+      btn.previousElementSibling.classList.toggle("is-open", open);
     });
 
     const roleMatches = (role, filter) => !filter.test || role.techStack.some((t) => filter.test.test(t));
@@ -285,14 +276,13 @@
           links.code ? `<a href="${escapeHtml(links.code)}" target="_blank" rel="noopener noreferrer">Code ↗</a>` : "",
         ].join("");
         return `
-        <li class="project-card reveal${p.featured ? " is-featured" : ""}" data-cats="${escapeHtml((p.category || []).join("|"))}">
+        <li class="project-card reveal" data-cats="${escapeHtml((p.category || []).join("|"))}">
           <div class="project-art">
             ${
               p.image
-                ? `<img src="${escapeHtml(p.image)}" width="1200" height="675" loading="lazy" decoding="async" alt="Screenshot of the ${escapeHtml(p.title)} home page">`
+                ? `<img src="${escapeHtml(p.image)}" width="1200" height="675" loading="lazy" decoding="async" alt="Screenshot of ${escapeHtml(p.title)}">`
                 : `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration for ${escapeHtml(p.title)}">${ART[p.art] || ART.generic}</svg>`
             }
-            ${p.featured ? '<span class="featured-flag">Featured</span>' : ""}
           </div>
           <div class="project-body">
             <p class="project-cats">${(p.category || []).map((c) => `<span>${escapeHtml(c)}</span>`).join("")}${p.year ? `<span>${escapeHtml(p.year)}</span>` : ""}</p>
@@ -306,7 +296,7 @@
       })
       .join("");
 
-    if (projects.length < 4) {
+    if (projects.length < 6) {
       bar.hidden = true;
       return;
     }

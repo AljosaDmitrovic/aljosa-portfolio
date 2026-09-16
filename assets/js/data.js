@@ -2,7 +2,6 @@
 //
 // HOW TO ADD A PROJECT: copy one object in the "projects" array below and change it.
 //   id          unique, lowercase-with-dashes
-//   featured    true = large card (use for one project at most)
 //   title, description
 //   highlights  optional list of short bullet points
 //   category    list of labels; the project filter buttons are built from these
@@ -272,7 +271,6 @@ window.CV = {
   "projects": [
     {
       "id": "bowling",
-      "featured": true,
       "title": "Bowling Center Management System",
       "description": "In-house system for a bowling center. Built the UI for the lane TV displays and the control TVs. All lane and scoring data was exchanged over an RS-485 serial bus, bridged to the PC through an RS-485-to-USB converter.",
       "highlights": [
@@ -296,7 +294,6 @@ window.CV = {
     },
     {
       "id": "blackjack021",
-      "featured": false,
       "title": "Black Jack 021 Barbershop",
       "description": "Website for a premium barbershop in Novi Sad: service menu, appointment booking and the shop's location, in Serbian and responsive on every device.",
       "highlights": [
@@ -321,15 +318,44 @@ window.CV = {
     },
     {
       "id": "freelance",
-      "featured": false,
       "title": "Freelance Projects",
       "description": "Owned and ran my own company for two years, working as an IT consultant.",
       "category": [
         "Freelance"
       ],
-      "techStack": [],
+      "techStack": [
+        "Project Management",
+        "IT Consulting",
+        "Business Analysis",
+        "Requirements Gathering",
+        "Client Communication"
+      ],
       "links": {},
       "art": "code"
+    },
+    {
+      "id": "premium-gaming-b2b",
+      "title": "Premium Gaming B2B Portal",
+      "description": "B2B ordering portal for Premium Gaming's business partners: companies browse the catalog, manage carts and place orders, while admins import products from Excel and review account change requests.",
+      "highlights": [
+        "Catalog with categories, subcategories and search",
+        "Multiple carts per company and order history",
+        "Excel product import with import history and admin panel"
+      ],
+      "category": [
+        "Full-stack"
+      ],
+      "techStack": [
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "React",
+        "Vite",
+        "Tailwind CSS"
+      ],
+      "art": "code",
+      "image": "assets/img/projects/premium-gaming-b2b.jpg",
+      "links": {}
     }
   ],
   "skills": {
