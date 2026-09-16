@@ -38,10 +38,11 @@
       document.getElementById("portrait-tag").textContent = `${current.role} @ ${current.employer || current.company}`;
     }
 
-    const stack = ["C#", ".NET", "ASP.NET Core", "Docker"];
+    const stack = ["C#", ".NET"];
     document.getElementById("code-card").innerHTML =
       `<span class="k">var</span> dev = <span class="k">new</span> Developer {\n` +
       `  Focus = <span class="s">"Backend"</span>,\n` +
+      `  SecondaryFocus = <span class="s">"Frontend"</span>,\n` +
       `  Stack = [${stack.map((s) => `<span class="s">"${escapeHtml(s)}"</span>`).join(", ")}],\n` +
       `  Hobbies = ${p.hobbies.length}\n` +
       `};`;
