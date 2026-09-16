@@ -413,7 +413,8 @@ svg { width: 1em; height: 1em; }
 
 @media (min-width: 961px) {
   .portrait { top: -2.5rem; }
-  .code-card { bottom: calc(-1 * var(--space-8)); }
+  .portrait-tag { top: -1.1rem; }
+  .code-card { bottom: -3.25rem; }
 }
 
 /* ---------- Motion ---------- */
