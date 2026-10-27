@@ -318,7 +318,7 @@ window.CV = {
     },
     {
       "id": "freelance",
-      "title": "Freelance Projects",
+      "title": "Freelance Project Manager",
       "description": "Owned and ran my own company for two years, working as an IT consultant.",
       "category": [
         "Freelance"
