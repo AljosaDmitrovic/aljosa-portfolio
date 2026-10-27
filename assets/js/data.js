@@ -101,7 +101,7 @@ window.CV = {
       "product": "International Workspace Group",
       "role": "Software Developer",
       "start": "2021-07",
-      "end": "2024-05",
+      "end": "2024-06",
       "domain": "Booking",
       "context": "Backend services behind search, availability and bookings across International Workspace Group's workspace products.",
       "bullets": [
@@ -356,6 +356,30 @@ window.CV = {
       "art": "code",
       "image": "assets/img/projects/premium-gaming-b2b.jpg",
       "links": {}
+    },
+    {
+      "id": "resolvo",
+      "title": "Resolvo Business & Personal Fixer",
+      "description": "Website for a personal and business support service in Novi Sad: services, monthly plans, FAQ and contact, in Serbian, English and Russian.",
+      "highlights": [
+        "Contact form that sends the request via WhatsApp or email",
+        "SEO structured data, hreflang sitemap and social images"
+      ],
+      "category": [
+        "Frontend",
+        "Client work"
+      ],
+      "techStack": [
+        "JavaScript",
+        "Node.js",
+        "HTML",
+        "CSS"
+      ],
+      "art": "code",
+      "links": {
+        "live": "https://resolvosolutions.com/"
+      },
+      "image": "assets/img/projects/resolvo.jpg"
     }
   ],
   "skills": {
